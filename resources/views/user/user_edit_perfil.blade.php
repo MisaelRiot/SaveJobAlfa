@@ -128,20 +128,21 @@
       </div>
     </nav>
 
-    <img src="img/FondoPerfil.png" class="bg" alt="">
+    <img src="{{ asset('user/img/menu/FondoPerfil.png') }}" class="bg" alt="">
     <!-- markup -->
     <!-- note: your server code `avatar_upload.php` will receive `$_FILES['avatar']` on form submission -->
     <!-- the avatar markup -->
     <div id="kv-avatar-errors-2" class="center-block" style="width:800px;display:none"></div>
 
     <div class="container" id="regForm">
-      <h1 class="text-center">Editar perfíl de muestra</h1>
-      <form class="form form-vertical" action="/avatar_upload.php" method="post" enctype="multipart/form-data">
+      <h1 class="text-center">Editar perfíl de muestra {{$user->name}}</h1>
+      <form class="form form-vertical" action="{{ route('actualizarfoto2') }}" method="post" enctype="multipart/form-data">
+        @csrf
           <div class="row">
               <div class="col-sm-12 text-center">
                   <div class="kv-avatar">
                     <div class="file-input file-input-ajax-new">
-                        <input id="avatar-2" name="avatar-2" type="file" required="" tabindex="-1" class="file-no-browse">
+                        <input id="avatar-2" name="foto" type="file" required="" tabindex="-1" class="file-no-browse">
                     </div>
                   </div>
               </div>
@@ -150,7 +151,7 @@
                   <div class="col-sm-12">
                     <div class="form-group">
                       <label for="exampleFormControlTextarea1">Algo sobre mí:</label>
-                      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                      <textarea class="form-control" id="exampleFormControlTextarea1" name="about" rows="3">{{$user->about}}</textarea>
                     </div>
                   </div>
 
@@ -180,7 +181,7 @@
         removeTitle: 'Cancel or reset changes',
         elErrorContainer: '#kv-avatar-errors-2',
         msgErrorClass: 'alert alert-block alert-danger',
-        defaultPreviewContent: '<img src="img/default-avatar-male.png" alt="Your Avatar"><h6 class="text-muted">Seleccionar</h6>',
+        defaultPreviewContent: '<img src="/storage/userphotos/{{$user->foto}}" alt="Your Avatar" style="width:auto;height:auto;max-width:100%;max-height:100%;" ><h6 class="text-muted">Seleccionar</h6>',
         layoutTemplates: {main2: '{preview} ' +  btnCust + ' {remove} {browse}'},
         allowedFileExtensions: ["jpg", "png", "gif"]
     });

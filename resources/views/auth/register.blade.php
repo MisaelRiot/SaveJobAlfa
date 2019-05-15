@@ -42,12 +42,7 @@
                             </div>
                         </div>
 
-                        <div class="form-check row">
-                          <input class="form-check-input" type="checkbox" value="1" id="defaultCheck1" name="terminosCondiciones">
-                          <label class="form-check-label" for="defaultCheck1">
-                            terminos y condiciones
-                          </label>
-                        </div>
+
 
                         @isset($url)
                           <div class="form-group row">
@@ -241,6 +236,18 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
+                        @isset($url)
+                        @else
+
+                        <div class="form-check form-group row" style="padding-left: 4.25rem;">
+                          <p></p>
+                          <input class="form-check-input col-md-12 text-md-left" type="checkbox" style="margin-top: -0.7rem;" value="1" id="defaultCheck1" name="terminosCondiciones">
+
+                          <label class="form-check-label col-md-12 text-center" for="defaultCheck1">
+                            Acepto términos y condiciones de uso
+                          </label>
+                        </div>
+                      @endisset
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">

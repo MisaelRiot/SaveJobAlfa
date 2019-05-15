@@ -28,6 +28,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('certificado');
             $table->string('foto')->default('default.jpg');
+            $table->string('about')->default('Lo que debes saber de mí...');
             $table->boolean('terminosCondiciones');
             $table->boolean('isValidated')->default(false);
             $table->boolean('isConected')->default(true);

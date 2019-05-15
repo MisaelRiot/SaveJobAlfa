@@ -36,7 +36,7 @@ class RedirectIfAuthenticated
           // es dirigido a la pantalla para administradores
           if ($guard == "admin" && Auth::guard($guard)->check() && (Auth::guard($guard)->user()->is_super == true) ) {
                   //return dd('condicional 3');
-                  if($request->getPathInfo()=="/login" || $request->getPathInfo()=='/login/admin' || $request->getPathInfo()=='/prueba')
+                  if($request->getPathInfo()=="/login" || $request->getPathInfo()=='/login/admin' || $request->getPathInfo()=='/prueba' || $request->getPathInfo()=='/register')
                   {
                     return redirect('/admin');
                   }

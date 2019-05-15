@@ -19,7 +19,7 @@ class CreateValidacionsTable extends Migration
             $table->unsignedBigInteger('admin_id');
             $table->date('fechaVencimiento')->nullable();
             $table->enum('estado', ['pendiente', 'exitosa','fallida'])->default('pendiente');
-            $table->string('observaciones');
+            $table->string('observaciones')->default('Añadir observaciones aquí');
             $table->timestamps();
         });
     }

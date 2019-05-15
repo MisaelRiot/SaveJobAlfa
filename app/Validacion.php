@@ -20,5 +20,5 @@ class Validacion extends Model
     {
       return $this->belongsTo('App\Admin');
     }
-}
+
 }

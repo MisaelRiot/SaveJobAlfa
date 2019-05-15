@@ -11,6 +11,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Dropbox\Client;
+use App\Events\UsuarioRegistrado;
 
 class RegisterController extends Controller
 {
@@ -64,7 +65,7 @@ class RegisterController extends Controller
           'documento' => ['required', 'numeric', 'unique:users'],//check
           'tipodocumento' => ['required', 'numeric'],//check
           'fechaNacimiento' => ['required', 'date'],//check
-          'telefono' => ['required', 'numeric'],//check
+          'telefono' => ['required', 'numeric', 'unique:users'],//check
           'direccion' => ['required', 'string', 'max:255'],//check
           'institucion' => ['required', 'string', 'max:255'],//check
           'certificado' => ['required', 'mimes:pdf', 'max:9999'],//check
@@ -109,7 +110,7 @@ class RegisterController extends Controller
             ["requested_visibility" => "public"]
         );
         // return dd($response);
-        return User::create([
+        $user = User::create([
           'name' => $data['name'],//check
           'email' => $data['email'],//check
           'password' => Hash::make($data['password']),//check
@@ -124,6 +125,8 @@ class RegisterController extends Controller
           'terminosCondiciones' => $data['terminosCondiciones'],//check
 
         ]);
+        event(new UsuarioRegistrado($user));
+        return $user;
     }
 
     public function showAdminRegisterForm()

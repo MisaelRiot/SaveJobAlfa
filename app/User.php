@@ -41,6 +41,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function validacion()
+    {
+        return $this->hasOne('App\Validacion');
+    }
+
     public function petition()
     {
       return $this->hasMany('App\Petition');

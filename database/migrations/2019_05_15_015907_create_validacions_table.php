@@ -15,6 +15,11 @@ class CreateValidacionsTable extends Migration
     {
         Schema::create('validacions', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id')->unique();
+            $table->unsignedBigInteger('admin_id');
+            $table->date('fechaVencimiento')->nullable();
+            $table->enum('estado', ['pendiente', 'exitosa','fallida'])->default('pendiente');
+            $table->string('observaciones');
             $table->timestamps();
         });
     }

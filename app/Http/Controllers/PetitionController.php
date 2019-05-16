@@ -19,7 +19,7 @@ class PetitionController extends Controller
     }
      public function esperarOfrecimiento($id)
      {
-
+       
        $solicitud = Petition::find($id);
 
 
@@ -41,6 +41,7 @@ class PetitionController extends Controller
     }
 
     public function envioSolicitud(Request $request){
+        // dd($this->solicitudValidator($request->all()));
         $data = $this->solicitudValidator($request->all())->validate();
         // dd($data);
         $solicitud = Petition::create([

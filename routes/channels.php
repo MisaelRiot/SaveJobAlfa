@@ -19,6 +19,12 @@ Broadcast::channel('notificaciondemodal.{id}', function ($user, $id) {
     return (int) $user->id === \App\Petition::find($id)->user_id;
 }, ['guards' =>['web']]);
 
+//canal de comunicacion con el que halla hecho el ofrecimiento
+//falta hacer la creacion de ofrecimiento
+Broadcast::channel('notificacionoferta.{id}', function ($user, $id) {
+    return (int) $user->id === \App\Offer::find($id)->user_id;
+}, ['guards' =>['web']]);
+
 //$user->ofrecimiento->id === id
 //canal para notificaciones a administrador
 Broadcast::channel('notificacionAdmins.{id}', function ($user, $id) {

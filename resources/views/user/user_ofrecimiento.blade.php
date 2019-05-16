@@ -143,7 +143,8 @@ button:hover {
 
   <img src="{{ asset('user/img/menu/FondoPerfil.png') }}" class="bg" alt="">
 
-<form id="regForm" action="/action_page.php">
+<form id="regForm" action="{{ route('ofrecimientoenvio') }}" method="post">
+  @csrf
   <h1>Ofrecer Tutoría:</h1>
   <!-- One "tab" for each step in the form: -->
   <div class="tab">
@@ -151,7 +152,7 @@ button:hover {
     <hr>
     <div class="form-group">
       <label for="inputAddress">Ubicación Actual</label>
-      <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+      <input type="text" class="form-control" id="inputAddress" name="direccion" placeholder="1234 Main St">
     </div>
 
   </div>
@@ -210,9 +211,9 @@ button:hover {
     </div>
     <div class="form-row">
       <div class="form-group col-md-6">
-        <select id="inputState" class="form-control">
+        <select id="inputState" class="form-control" name="semestre">
           <option selected>Semestre o Pensum</option>
-          <option>Calculo I</option>
+          <option value"a">Calculo I</option>
           <option>3</option>
           <option>4</option>
           <option>5</option>
@@ -225,10 +226,10 @@ button:hover {
 
       <div class="form-group col-md-6">
 
-        <select id="inputState" class="form-control">
+        <select id="inputState" class="form-control" name="asignatura">
           <option selected>Asignatura</option>
-          <option>2</option>
-          <option>3</option>
+          <option value=1>2</option>
+          <option value=2>3</option>
           <option>4</option>
           <option>5</option>
           <option>6</option>

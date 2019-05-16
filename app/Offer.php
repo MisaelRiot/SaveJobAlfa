@@ -9,7 +9,7 @@ class Offer extends Model
     //campos que se pueden llenar del modelo de ofrecimiento
     //por parte del usuario
     protected $fillable = [
-        'direccion', 'asignatura',
+        'direccion', 'asignatura_id','user_id',
     ];
 
     //relacion: uno o mas ofrecimientos pertenecen a un usuario

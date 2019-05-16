@@ -41,8 +41,11 @@ Route::post('/user/edit/info', 'UserController@updateInfo')->name('actualizarinf
 Route::get('/user/solicitud', 'PetitionController@formularioSolicitud')->name('solicitudformulario');
 Route::post('/user/solicitud', 'PetitionController@envioSolicitud')->name('solicitudenvio');
 Route::get('/user/buscando/solicitud/{id}','PetitionController@esperarOfrecimiento')->name('buscandoOferta');
-//hacer ofrecimiento
 
+//hacer ofrecimiento
+Route::get('/user/ofrecimiento', 'OfferController@formularioOfrecimiento')->name('ofrecimientoformulario');
+Route::post('user/ofrecimiento', 'OfferController@envioOfrecimiento')->name('ofrecimientoenvio');
+Route::get('/user/buscando/ofrecimiento/{id}','OfferController@esperarSolicitud')->name('buscandoSolicitud');
 
 //consultar historial
 
@@ -53,7 +56,7 @@ Route::view('/user/menu', 'user.user_menu');
 // Route::view('/user/edit/profile', 'user.user_edit_perfil');
 // Route::view('/user/edit/info', 'user.user_edit_info');
 Route::view('/user/historial', 'user.user_historial');
-Route::view('/user/ofrecimiento', 'user.user_ofrecimiento');
+// Route::view('/user/ofrecimiento', 'user.user_ofrecimiento');
 // Route::view('/user/solicitud', 'user.user_solicitud');
 
 

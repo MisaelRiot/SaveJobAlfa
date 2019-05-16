@@ -8,7 +8,13 @@
                 <div class="card-header">Dashboard</div>
 
                 <div class="card-body">
-                    Hi boss!
+                    Hi boss! tenemos {{count(Auth::user()->validaciones)}} validaciones para realizar.
+                    <ul>
+                      @foreach (Auth::user()->validaciones as $validacion)
+                        <li>{{$validacion->user_id}}</li>
+                        <a href="{{$validacion->user->certificado}}" target="_blank">Visualizar certificado</a>
+                      @endforeach
+                    </ul>
                 </div>
             </div>
         </div>

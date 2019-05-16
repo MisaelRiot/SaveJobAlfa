@@ -29,7 +29,7 @@ class CrearValidacion
 
         $validacion = new Validacion;
         $validacion->user_id = $event->user->id;
-        $validacion->admin_id =1;
+        $validacion->admin_id =1; // en esta linea se debe cambiar el usuario
         $validacion->save();
         // return dd($validacion);
     }

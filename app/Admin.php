@@ -41,8 +41,8 @@ class Admin extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    
-    public function validacion()
+
+    public function validaciones()
     {
         return $this->hasMany('App\Validacion');
     }

@@ -81,7 +81,7 @@
           });
 
           // Subscribe to the channel we specified in our Laravel Event
-          var channel = pusher.subscribe('private-notificaciondemodal.{{ Auth::user()->id }}');
+          var channel = pusher.subscribe('private-notificaciondemodal.{{ $solicitud->id }}');
                                                                         //user()->ofrecimiento->id
           // Bind a function to a Event (the full Laravel class)
           channel.bind('App\\Events\\TestingPopUp', function(data) {

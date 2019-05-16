@@ -19,7 +19,7 @@ class CreatePetitionsTable extends Migration
             $table->string('descripcion');
             $table->date('fecha');
             $table->time('hora');
-            $table->smallInteger('numerohoras')
+            $table->smallInteger('numerohoras');
             $table->decimal('valor')->default(20000);
             $table->unsignedBigInteger('asignatura_id');
             $table->unsignedBigInteger('user_id');

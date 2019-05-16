@@ -40,7 +40,7 @@ Route::post('/user/edit/info', 'UserController@updateInfo')->name('actualizarinf
 //hacer solicitud de tutoria
 Route::get('/user/solicitud', 'PetitionController@formularioSolicitud')->name('solicitudformulario');
 Route::post('/user/solicitud', 'PetitionController@envioSolicitud')->name('solicitudenvio');
-
+Route::get('/user/buscando/solicitud/{id}','PetitionController@esperarOfrecimiento')->name('buscandoOferta');
 //hacer ofrecimiento
 
 
@@ -59,8 +59,8 @@ Route::view('/user/ofrecimiento', 'user.user_ofrecimiento');
 
 //pop up SEnder
 Route::get('test', function () {
-    event(new App\Events\TestingPopUp('2'));
+    event(new App\Events\TestingPopUp('1'));
     return "Event has been sent!";
 });
 
-// Route::any('/broadcasting/auth', '\Illuminate\Broadcasting\BroadcastController@authenticate');
+Route::any('/broadcasting/auth', '\Illuminate\Broadcasting\BroadcastController@authenticate');

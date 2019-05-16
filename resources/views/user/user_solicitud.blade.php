@@ -267,7 +267,7 @@ button:hover {
         <select id="inputState" class="form-control" name="asignatura">
           <option selected>Asignatura</option>
           <option value=1>Matematicas</option>
-          <option>3</option>
+          <option value=2>Programación</option>
           <option>4</option>
           <option>5</option>
           <option>6</option>

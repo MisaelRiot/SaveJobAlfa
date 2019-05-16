@@ -33,6 +33,7 @@ class UsuarioRegistrado
      */
     public function broadcastOn()
     {
+      //definir canal de administradores
         return new PrivateChannel('channel-name');
     }
 }

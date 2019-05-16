@@ -55,3 +55,12 @@ Route::view('/user/menu', 'user.user_menu');
 Route::view('/user/historial', 'user.user_historial');
 Route::view('/user/ofrecimiento', 'user.user_ofrecimiento');
 Route::view('/user/solicitud', 'user.user_solicitud');
+
+
+//pop up SEnder
+Route::get('test', function () {
+    event(new App\Events\TestingPopUp());
+    return "Event has been sent!";
+});
+
+Route::any('/broadcasting/auth', '\Illuminate\Broadcasting\BroadcastController@authenticate');

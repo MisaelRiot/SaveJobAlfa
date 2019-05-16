@@ -21,7 +21,7 @@ Broadcast::channel('notificaciondemodal.{id}', function ($user, $id) {
 
 //canal de comunicacion con el que halla hecho el ofrecimiento
 //falta hacer la creacion de ofrecimiento
-Broadcast::channel('notificacionoferta.{id}', function ($user, $id) {
+Broadcast::channel('ofrecimientonuevo.{id}', function ($user, $id) {
     return (int) $user->id === \App\Offer::find($id)->user_id;
 }, ['guards' =>['web']]);
 

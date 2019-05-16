@@ -55,7 +55,7 @@ class OfferController extends Controller
           'user_id' => Auth::user()->id,//check
         ]);
         event(new TestingPopUp('1')); //manda al modal 1
-        return redirect()->route('buscandoOferta',$ofrecimiento);
+        return redirect()->route('buscandoSolicitud',$ofrecimiento);
     }
 
 }

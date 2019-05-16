@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Validator;
+use App\Events\TestingPopUp;
 use App\Offer;
 use App\User;
 use Auth;
@@ -53,6 +54,7 @@ class OfferController extends Controller
           // 'valor' => ($data['numerohoras']*17000),//check
           'user_id' => Auth::user()->id,//check
         ]);
+        event(new TestingPopUp('1')); //manda al modal 1
         return redirect()->route('buscandoOferta',$ofrecimiento);
     }
 

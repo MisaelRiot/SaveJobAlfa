@@ -17,8 +17,10 @@ class CreatePetitionsTable extends Migration
             $table->bigIncrements('id');
             $table->string('direccion');
             $table->string('descripcion');
-            $table->datetime('fecha');
-            $table->decimal('valor');
+            $table->date('fecha');
+            $table->time('hora');
+            $table->smallInteger('numerohoras')
+            $table->decimal('valor')->default(20000);
             $table->unsignedBigInteger('asignatura_id');
             $table->unsignedBigInteger('user_id');
             $table->enum('estado',['asignado','pendiente','cancelado'])->default('pendiente');

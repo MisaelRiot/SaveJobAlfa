@@ -14,15 +14,17 @@ class TestingPopUp implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     public $mensaje;
+    public $variable;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($entrada)
     {
         //
         $this->mensaje = 'Usted ha recibido un mensaje';
+        $this->variable = $entrada;
     }
 
     /**
@@ -32,6 +34,6 @@ class TestingPopUp implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('notificaciondemodal.'.'1');
+        return new PrivateChannel('notificaciondemodal.'.$this->variable);
     }
 }

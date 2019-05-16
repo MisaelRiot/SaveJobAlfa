@@ -16,5 +16,7 @@ Broadcast::channel('App.User.{id}', function ($user, $id) {
 });
 
 Broadcast::channel('notificaciondemodal.{id}', function ($user, $id) {
-    return true;
+    return (int) $user->id === (int) $id;
 }, ['guards' =>['admin']]);
+
+//$user->ofrecimiento->id === id

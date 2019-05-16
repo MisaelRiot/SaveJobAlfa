@@ -35,7 +35,7 @@
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" id="deletesuccess" class="btn btn-primary">Save changes</button>
                           </div>
                         </div>
                       </div>
@@ -67,11 +67,35 @@
 
       // Subscribe to the channel we specified in our Laravel Event
       var channel = pusher.subscribe('private-notificaciondemodal.{{ Auth::guard('admin')->user()->id }}');
-
+                                                                    //user()->ofrecimiento->id
       // Bind a function to a Event (the full Laravel class)
       channel.bind('App\\Events\\TestingPopUp', function(data) {
-      $('#cont_menj').html(data['mensaje']);
-      $('#exampleModal').modal('show');
+        $('#exampleModal').modal('show');
+      // $('#cont_menj').html(data['mensaje']);
+      // var cvr = $("#cover");
+      // var dlg = $("#dialog");
+      var t = 10;
+      // isVisibleCvr = cvr.is(":visible");
+      // isVisibleDlg = dlg.is(":visible");
+      if(true){
+          (function countDown(){
+              if (t--) {
+                 $('#cont_menj').html(t + ' s');
+                 setTimeout(countDown, 1000);
+              } else {
+                 $('#cont_menj').html('gone!');
+                 $('#deletesuccess').remove();
+                 window.location.replace("/");
+
+                 // cvr.add(dlg).hide();
+              }
+          })();
+      }
+
+
+
+
+
       });
 </script>
 @endsection

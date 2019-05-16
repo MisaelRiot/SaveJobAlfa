@@ -38,8 +38,8 @@ Route::get('/user/edit/info', 'UserController@editInfoForm')->name('actualizarin
 Route::post('/user/edit/info', 'UserController@updateInfo')->name('actualizarinfo2');
 
 //hacer solicitud de tutoria
-// Route::get('/user/solicitud', 'SolicitudController@fomularioSolicitud')->name('solicitudformulario');
-// Route::post('/user/solicitud', 'SolicitudController@fomularioSolicitud')->name('solicitudenvio');
+Route::get('/user/solicitud', 'PetitionController@formularioSolicitud')->name('solicitudformulario');
+Route::post('/user/solicitud', 'PetitionController@envioSolicitud')->name('solicitudenvio');
 
 //hacer ofrecimiento
 
@@ -54,13 +54,13 @@ Route::view('/user/menu', 'user.user_menu');
 // Route::view('/user/edit/info', 'user.user_edit_info');
 Route::view('/user/historial', 'user.user_historial');
 Route::view('/user/ofrecimiento', 'user.user_ofrecimiento');
-Route::view('/user/solicitud', 'user.user_solicitud');
+// Route::view('/user/solicitud', 'user.user_solicitud');
 
 
 //pop up SEnder
 Route::get('test', function () {
-    event(new App\Events\TestingPopUp());
+    event(new App\Events\TestingPopUp('2'));
     return "Event has been sent!";
 });
 
-Route::any('/broadcasting/auth', '\Illuminate\Broadcasting\BroadcastController@authenticate');
+// Route::any('/broadcasting/auth', '\Illuminate\Broadcasting\BroadcastController@authenticate');

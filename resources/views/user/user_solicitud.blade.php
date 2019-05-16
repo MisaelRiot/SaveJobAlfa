@@ -143,7 +143,8 @@ button:hover {
 
   <img src="{{ asset('user/img/menu/FondoPerfil.png') }}" class="bg" alt="">
 
-<form id="regForm" action="/action_page.php">
+<form id="regForm" action="{{ route('solicitudenvio')}}" method="post">
+  @csrf
   <h1>Solicitar Tutoría:</h1>
   <!-- One "tab" for each step in the form: -->
   <div class="tab">
@@ -151,11 +152,11 @@ button:hover {
     <hr>
     <div class="form-group">
       <label for="inputAddress">Dirección</label>
-      <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+      <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" name="direccion">
     </div>
     <div class="form-group">
       <label for="inputDescripcion">Descripción</label>
-      <input type="text" class="form-control" id="inputDescripcion" placeholder="Dale al prestador los detalles de tu solicitud...">
+      <input type="text" class="form-control" id="inputDescripcion" placeholder="Dale al prestador los detalles de tu solicitud..." name="descripcion">
     </div>
   </div>
 
@@ -166,7 +167,7 @@ button:hover {
 
         <div class="form-group">
           <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
-              <input type="text" class="form-control datetimepicker-input" placeholder="Fecha" data-target="#datetimepicker4"/>
+              <input type="text" class="form-control datetimepicker-input" name="fecha" placeholder="Fecha" data-target="#datetimepicker4"/>
               <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
                   <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
               </div>
@@ -181,7 +182,12 @@ button:hover {
       <div class="form-group col-md-4">
 
         <div class="input-group date" id="datetimepicker3" data-target-input="nearest">
-              <input type="text" class="form-control datetimepicker-input center" placeholder="Hora" data-target="#datetimepicker3"/>
+              <input type="text" class="form-control datetimepicker-input center" name="time" placeholder="Hora" data-target="#datetimepicker3"/>
+              @error('time')
+                  <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                  </span>
+              @enderror
               <div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
                   <div class="input-group-text"><i class="far fa-clock"></i></div>
               </div>
@@ -258,9 +264,9 @@ button:hover {
 
       <div class="form-group col-md-6">
 
-        <select id="inputState" class="form-control">
+        <select id="inputState" class="form-control" name="asignatura">
           <option selected>Asignatura</option>
-          <option>2</option>
+          <option value=1>Matematicas</option>
           <option>3</option>
           <option>4</option>
           <option>5</option>
@@ -276,7 +282,7 @@ button:hover {
   <div class="tab">
     <div class="form-group col-md-6">
       <label for="inputHoras">Numero de Horas</label>
-      <select id="inputState" class="form-control">
+      <select id="numerohoras" class="form-control" name="numerohoras">
         <option selected>1</option>
         <option>2</option>
         <option>3</option>
@@ -286,10 +292,15 @@ button:hover {
         <option>7</option>
         <option>8</option>
       </select>
+
+    </div>
+
+    <div class="form-group col-md-6">
+      <label id='precio2'></label>
     </div>
 
     <div class="form-group col-md-4">
-      <button type="submit" class="btn btn-primary col-md-12">Calcular Tarifa</button>
+      <button type="button" onclick="mostrarTarifa()" class="btn btn-primary col-md-12">Calcular Tarifa</button>
     </div>
 
   </div>
@@ -407,6 +418,15 @@ function fixStepIndicator(n) {
                 format: 'LT'
             });
         });
+</script>
+
+<script type="text/javascript">
+    function mostrarTarifa() {
+    let precio =  parseInt(document.getElementById("numerohoras").value);
+    let precioFinal =  17000*precio;
+    console.log(precioFinal);
+    document.getElementById("precio2").innerHTML='Tu tarifa es: $' + precioFinal + ' COP';
+    }
 </script>
 </body>
 </html>

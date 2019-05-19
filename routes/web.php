@@ -67,3 +67,6 @@ Route::get('test', function () {
 });
 
 Route::any('/broadcasting/auth', '\Illuminate\Broadcasting\BroadcastController@authenticate');
+
+// vistas de administradores
+Route::view('/admin/home', 'admin.admin_home');

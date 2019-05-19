@@ -12,6 +12,7 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('user/css/interaccion.css') }}">
 
   </head>
   <body>
@@ -19,7 +20,7 @@
     <div class="bg"></div>
     <div class="bg bg2"></div>
     <div class="bg bg3"></div>
-    <h1>Conectando con Solicitud..{{ $ofrecimiento->id}}</h1>
+    <h1 id="cambio">Conectando con Solicitud..{{ $ofrecimiento->id}}</h1>
     <div id="cooking">
       <div class="bubble"></div>
       <div class="bubble"></div>
@@ -43,7 +44,7 @@
       </div> -->
     </div>
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {{-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -52,16 +53,138 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body" id="cont_menj">
-            UN USUARIO atenderá tu solicitud
-          </div>
+
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" id="deletesuccess" class="btn btn-primary">Save changes</button>
+            <button type="button" id="deletesuccess" onclick="irAinteraccion()" class="btn btn-primary">Save changes</button>
           </div>
         </div>
       </div>
+    </div> --}}
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+      <div class="row justify-content-center h-100">
+				<div class="col-md-4 col-xl-3 chat interaccion1">
+					<div class="card mb-sm-3 mb-md-0 contacts_card">
+					<div class="card-header">
+
+						<div class="input-group">
+              <img src="{{ asset('user/img/LogoInicio.png') }}" class="card-img-top" style="height: 75px; width:79px; margin-left: auto; margin-right: auto;" alt="">
+							<!-- <input type="text" placeholder="Search..." name="" class="form-control search">
+							<div class="input-group-prepend">
+								<span class="input-group-text search_btn"><i class="fas fa-search"></i></span>
+							</div> -->
+						</div>
+            <h1 class="text-center">Interacción</h1>
+					</div>
+					<div class="card-body contacts_body">
+						<ui class="contacts">
+						<li class="active">
+							<div class="d-flex bd-highlight">
+								<div class="img_cont">
+									<img src="https://www.freshmorningquotes.com/wp-content/uploads/2015/11/cute-and-beautifull-girls-profile-pictures.jpg" class="rounded-circle user_img">
+									<span class="online_icon"></span>
+								</div>
+								<div class="user_info">
+									<span>Mariana Doe</span>
+									<p>Maryam solicitó el servicio</p>
+								</div>
+                <hr style="color: #f00; background-color: #f00; ">
+							</div>
+						</li>
+						<li>
+							<div class="d-flex bd-highlight">
+								<div class="img_cont">
+									<img src="https://2.bp.blogspot.com/-8ytYF7cfPkQ/WkPe1-rtrcI/AAAAAAAAGqU/FGfTDVgkcIwmOTtjLka51vineFBExJuSACLcBGAs/s320/31.jpg" class="rounded-circle user_img">
+									<span class="online_icon offline"></span>
+								</div>
+								<div class="user_info">
+									<span>Catalina Alegría</span>
+									<p>Sahar aceptó la solicitud</p>
+								</div>
+							</div>
+						</li>
+            <div class="dropdown-divider"></div>
+
+
+						<li>
+							<div class="d-flex bd-highlight" style="color: ##212529; font-size: 1.5rem;">
+								<div class="img_cont">
+                  <span>Fecha:</span>
+									<p>25 de abril de 2019</p>
+                  <!-- <img src="https://i.pinimg.com/originals/54/6e/6d/546e6d4c6ce4322e6aa3b2f8ca73ac28.jpg" class="rounded-circle user_img">
+									<span class="online_icon"></span> -->
+								</div>
+								<!-- <div class="user_info">
+									<span>Fecha:</span>
+									<p>25 de abril de 2019</p>
+								</div> -->
+							</div>
+						</li>
+            <li>
+							<div class="d-flex bd-highlight" style="color: ##212529; font-size: 1.5rem;">
+								<div class="img_cont">
+                  <span>Dirección del servicio:</span>
+									<p>Calle 25d # 40-65 </p>
+                  <!-- <img src="https://i.pinimg.com/originals/54/6e/6d/546e6d4c6ce4322e6aa3b2f8ca73ac28.jpg" class="rounded-circle user_img">
+									<span class="online_icon"></span> -->
+								</div>
+								<!-- <div class="user_info">
+									<span>Fecha:</span>
+									<p>25 de abril de 2019</p>
+								</div> -->
+							</div>
+						</li>
+            <li>
+							<div class="d-flex bd-highlight" style="color: ##212529; font-size: 1.5rem;">
+								<div class="img_cont">
+                  <span>Valor del servicio:</span>
+									<p>$30500 COP</p>
+                  <!-- <img src="https://i.pinimg.com/originals/54/6e/6d/546e6d4c6ce4322e6aa3b2f8ca73ac28.jpg" class="rounded-circle user_img">
+									<span class="online_icon"></span> -->
+								</div>
+								<!-- <div class="user_info">
+									<span>Fecha:</span>
+									<p>25 de abril de 2019</p>
+								</div> -->
+							</div>
+						</li>
+            <li>
+							<div class="d-flex bd-highlight" style="color: ##212529; font-size: 1.5rem;">
+								<div class="img_cont">
+                  <span>Materia:</span>
+									<p>Ayuda con esto y aquello</p>
+                  <!-- <img src="https://i.pinimg.com/originals/54/6e/6d/546e6d4c6ce4322e6aa3b2f8ca73ac28.jpg" class="rounded-circle user_img">
+									<span class="online_icon"></span> -->
+								</div>
+								<!-- <div class="user_info">
+									<span>Fecha:</span>
+									<p>25 de abril de 2019</p>
+								</div> -->
+							</div>
+						</li>
+            <li>
+							<div class="d-flex bd-highlight" style="color: ##212529; font-size: 1.5rem;">
+								<div class="img_cont">
+                  <span>Descripción:</span>
+									<p>Ayuda con esto y aquello</p>
+                  <!-- <img src="https://i.pinimg.com/originals/54/6e/6d/546e6d4c6ce4322e6aa3b2f8ca73ac28.jpg" class="rounded-circle user_img">
+									<span class="online_icon"></span> -->
+								</div>
+								<!-- <div class="user_info">
+									<span>Fecha:</span>
+									<p>25 de abril de 2019</p>
+								</div> -->
+							</div>
+						</li>
+						</ui>
+					</div>
+					<div class="card-footer"></div>
+				</div>
+      </div>
+
     </div>
+
     <script src="https://js.pusher.com/4.4/pusher.min.js"></script>
     <script type="text/javascript">
           // Enable pusher logging - don't include this in production
@@ -85,8 +208,11 @@
                                                                         //user()->ofrecimiento->id
           // Bind a function to a Event (the full Laravel class)
           channel.bind('App\\Events\\OfrecimientoNuevo', function(data) {
+            $('#cont_menj').html(data.mensaje);
+            $('#exampleModalLabel').text(data.mensaje);
             $('#exampleModal').modal('show');
-          // $('#cont_menj').html(data['mensaje']);
+          //   //
+            // console.log(data.mensaje)
           // var cvr = $("#cover");
           // var dlg = $("#dialog");
           var t = 10;
@@ -112,6 +238,13 @@
 
 
           });
+    </script>
+
+    <script type="text/javascript">
+      function irAinteraccion(){
+        window.location.replace("/user/interaccion");
+      }
+
     </script>
   </body>
 </html>

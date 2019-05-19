@@ -101,11 +101,12 @@
                      $('#cont_menj').html('gone!');
                      $('#deletesuccess').remove();
                      // window.location.replace("/");
-
+                     location.reload(true);
                      // cvr.add(dlg).hide();
                   }
               })();
           }
+
 
 
 

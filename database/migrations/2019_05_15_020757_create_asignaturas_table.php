@@ -15,6 +15,8 @@ class CreateAsignaturasTable extends Migration
     {
         Schema::create('asignaturas', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('pensum_id');
+            $table->string('nombre');
             $table->timestamps();
         });
     }

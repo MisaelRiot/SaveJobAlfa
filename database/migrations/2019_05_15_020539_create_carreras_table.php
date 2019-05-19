@@ -15,6 +15,8 @@ class CreateCarrerasTable extends Migration
     {
         Schema::create('carreras', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('facultad_id');
+            $table->string('nombre');
             $table->timestamps();
         });
     }

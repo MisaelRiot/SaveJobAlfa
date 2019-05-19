@@ -15,6 +15,8 @@ class CreateFacultadsTable extends Migration
     {
         Schema::create('facultads', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('universidad_id');
+            $table->string('nombre');
             $table->timestamps();
         });
     }

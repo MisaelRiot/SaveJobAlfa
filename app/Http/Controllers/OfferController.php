@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Events\TestingPopUp;
 use App\Offer;
 use App\User;
+use App\Petition;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -21,6 +22,16 @@ class OfferController extends Controller
 
     public function esperarSolicitud($id)
     {
+
+      $solicitud = Petition::where('estado', 'pendiente')->orderBy('created_at', 'desc')->exists();
+      // return dd($ofrecimiento);
+
+      if ($solicitud) {
+        // si existe le manda un evento y se va a la pagina de espera
+        $solicitud = Petition::where('estado', 'pendiente')->orderBy('created_at', 'desc')->first();
+        event(new TestingPopUp($solicitud->id, $id));
+      }
+      //se busca a si mismo para quedar en la pagina de espera hasta que se de un nuevo ofrecimiento
 
       $ofrecimiento = Offer::find($id);
 
@@ -54,7 +65,7 @@ class OfferController extends Controller
           // 'valor' => ($data['numerohoras']*17000),//check
           'user_id' => Auth::user()->id,//check
         ]);
-        event(new TestingPopUp('1')); //manda al modal 1
+        // event(new TestingPopUp('1')); //manda al modal 1
         return redirect()->route('buscandoSolicitud',$ofrecimiento);
     }
 

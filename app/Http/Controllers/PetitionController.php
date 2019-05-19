@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Events\OfrecimientoNuevo;
 use App\Petition;
 use App\User;
+use App\Offer;
 use Auth;
 class PetitionController extends Controller
 {
@@ -19,10 +21,17 @@ class PetitionController extends Controller
     }
      public function esperarOfrecimiento($id)
      {
-       
+       //establece si existe un ofrecimiento
+       $ofrecimiento = Offer::where('estado', 'pendiente')->orderBy('created_at', 'desc')->exists();
+       // return dd($ofrecimiento);
+
+       if ($ofrecimiento) {
+         // si existe le manda una solicitud y se va a la pagina de espera
+         $ofrecimiento = Offer::where('estado', 'pendiente')->orderBy('created_at', 'desc')->first();
+         event(new OfrecimientoNuevo($ofrecimiento->id,'Quiero que me enseñes'));
+       }
+       //se busca a si mismo para quedar en la pagina de espera hasta que se de un nuevo ofrecimiento
        $solicitud = Petition::find($id);
-
-
        return view('user.user_espera')->with('solicitud', $solicitud);
      }
 

@@ -20,10 +20,10 @@ class OfrecimientoNuevo implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct($entrada)
+    public function __construct($entrada, $envioASolicitud)
     {
         //
-        $this->mensaje = 'Usted ha recibido un mensaje';
+        $this->mensaje = $envioASolicitud;
         $this->variable = $entrada;
     }
 

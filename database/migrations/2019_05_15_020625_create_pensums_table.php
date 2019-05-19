@@ -15,6 +15,8 @@ class CreatePensumsTable extends Migration
     {
         Schema::create('pensums', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('carrera_id');
+            $table->string('nombre');
             $table->timestamps();
         });
     }

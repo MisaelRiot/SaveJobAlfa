@@ -58,7 +58,7 @@ Route::view('/user/menu', 'user.user_menu');
 Route::view('/user/historial', 'user.user_historial');
 // Route::view('/user/ofrecimiento', 'user.user_ofrecimiento');
 // Route::view('/user/solicitud', 'user.user_solicitud');
-
+Route::view('/user/interaccion', 'user.user_interaccion');
 
 //pop up SEnder
 Route::get('test', function () {

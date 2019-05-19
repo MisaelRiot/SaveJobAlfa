@@ -15,6 +15,9 @@ class CreateUniversidadsTable extends Migration
     {
         Schema::create('universidads', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('nit')->unique();
+            $table->string('nombre');
+            $table->string('paginaWeb');
             $table->timestamps();
         });
     }

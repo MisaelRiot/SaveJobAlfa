@@ -166,14 +166,14 @@
         <ul class="sidebar-menu">
           <li class="header">FUNCIONES</li>
           <!-- Optionally, you can add icons to the links -->
-          <li class="active"><a href="#"><i class="fa fa-users"></i><span> Gestionar Usuarios</span></a><</li>
+          <li class=""><a href="#"><i class="fa fa-users"></i><span> Gestionar Usuarios</span></a><</li>
           <li><a href="#"><i class="fa fa-flag-o"></i><span> Validaciones</span><span class="pull-right-container">
             <span class="label label-primary pull-right">4</span>
           </span></a></li>
-          <li class="treeview">
+          <li class="treeview active">
             <a href="#"> <i class="fa fa-edit"></i> <span>Gestionar Turorías</span> <i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu">
-              <li><a href="#"><i class="fa fa-circle-o"></i>Gestionar Universidades</a></li>
+              <li class="active"><a href="#"><i class="fa fa-circle-o"></i>Gestionar Universidades</a></li>
               <li><a href="#"><i class="fa fa-circle-o"></i>Gestionar Facultades</a></li>
               <li><a href="#"><i class="fa fa-circle-o"></i>Gestionar Carreras</a></li>
               <li><a href="#"><i class="fa fa-circle-o"></i>Gestionar Pensums</a></li>
@@ -189,154 +189,186 @@
       <!-- Content Header (Page header) -->
       <section class="content-header">
         <h1>
-          Perfil de Usuario
+          Gestión Universidades
           <small>Miembro de Staff</small>
         </h1>
         <ol class="breadcrumb">
-          <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-          {{-- <li><a href="#">Examples</a></li>
-          <li class="active">User profile</li> --}}
+          <li><a href="#"><i class="fa fa-dashboard"></i> Gestión Tutorias</a></li>
+          {{-- <li><a href="#">Examples</a></li> --}}
+          <li class="active">Gestión Universidades</li>
         </ol>
       </section>
       <section class="content">
-        <div class="row">
-          <div class="col-md-3">
-            <div class="box box-primary">
-              <div class="box-body box-profile">
-                <img class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">
+        @php
+          $message=Session::get('message')
+        @endphp
 
-                <h3 class="profile-username text-center">User Name</h3>
-
-                <p class="text-muted text-center">Miembro de Staff</p>
-
-                <ul class="list-group list-group-unbordered">
-                  <li class="list-group-item">
-                    <b>Validaciones Totales</b> <a class="pull-right">1,322</a>
-                  </li>
-                  <li class="list-group-item">
-                    <b>Validaciones Realizadas</b> <a class="pull-right">543</a>
-                  </li>
-                  <li class="list-group-item">
-                    <b>Validaciones Pendientes</b> <a class="pull-right">13,287</a>
-                  </li>
-                </ul>
-
-                <a href="#" class="btn btn-primary btn-block"><b>Promover</b></a>
-              </div>
-              <!-- /.box-body -->
+        @if ($message=='store')
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h4><i class="icon fa fa-check"></i> Felicidades!</h4>
+                !Universidad agregada exitosamente!
             </div>
-            <!-- About Me Box -->
+        @endif
+        @if ($message=='updated')
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h4><i class="icon fa fa-check"></i> Felicidades!</h4>
+                !Universidad actualizada exitosamente!
+            </div>
+        @endif
+        @if ($message=='eliminated')
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h4><i class="icon fa fa-check"></i> Felicidades!</h4>
+                !Universidad borrada exitosamente!
+            </div>
+        @endif
+        <div class="row">
+          <div class="col-md-4">
             <div class="box box-primary">
               <div class="box-header with-border">
-                <h3 class="box-title">Sobre Mí</h3>
-              </div>
-              <!-- /.box-header -->
-              <div class="box-body">
-                <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
+                <h3 class="box-title">Añadir Universidad</h3>
+                <div class="box-tools pull-right">
+                  <button class="btn btn-box-tool"><i class="fa fa-plus"></i></button>
+                </div><!-- /.box-tools -->
+              </div><!-- /.box-header -->
+              <form method="POST" action="/admin/universidades"  role="form">
+                @csrf
+                <div class="box-body">
 
-                <p class="text-muted">
-                  B.S. in Computer Science from the University of Tennessee at Knoxville
-                </p>
-
-                <hr>
-
-                <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
-
-                <p class="text-muted">Malibu, California</p>
-
-
-                <hr>
-
-                <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
-              </div>
-              <!-- /.box-body -->
-            </div>
-
-
-          </div>
-          <div class="col-md-9">
-            <div class="nav-tabs-custom">
-              <ul class="nav nav-tabs">
-                <li class="active"><a href="#activity" data-toggle="tab">Actividades</a></li>
-              </ul>
-              <div class="tab-content">
-                <div class="active tab-pane" id="activity">
-                  <!-- Post -->
-                  <div class="post">
-                    <div class="user-block">
-                      <h2>Algunos atajos!</h2>
-                    </div>
-                    <!-- /.user-block -->
-                    <p>
-                      En esta sección cuentas con algunos atajos,
-                      para agilizar tus obligaciones del día, también las podrás
-                      encontrar en la barra lateral a tu izquierda, te deseamos muchos éxitos y un lindo y productivo día.
-                    </p>
-
-                    <div class="">
-                      <!-- small box -->
-                      <div class="small-box bg-aqua">
-                        <div class="inner">
-                          <h3>Número de usuarios</h3>
-
-                          <p>Gestionar Usuarios</p>
-                        </div>
-                        <div class="icon">
-                          <i class="fa ion ion-person"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">
-                          Realizar acción <i class="fa fa-arrow-circle-right"></i>
-                        </a>
-                      </div>
-                    </div>
-                    <div class="">
-                      <!-- small box -->
-                      <div class="small-box bg-red">
-                        <div class="inner">
-                          <h3>Validaciones Pendientes</h3>
-
-                          <p>Realizar Validaciones</p>
-                        </div>
-                        <div class="icon">
-                          <i class="fa fa-flag-o"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">
-                          Realizar Acción <i class="fa fa-arrow-circle-right"></i>
-                        </a>
-                      </div>
-                    </div>
-
-                    <div class="">
-                      <!-- small box -->
-                      <div class="small-box bg-green">
-                        <div class="inner">
-                          <h3>Asignaturas Agregadas</h3>
-
-                          <p>Gestionar Tutorías</p>
-                        </div>
-                        <div class="icon">
-                          <i class="fa fa-edit"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">
-                          Realizar Acción <i class="fa fa-arrow-circle-right"></i>
-                        </a>
-                      </div>
-                    </div>
-
+                  <div class="form-group">
+                    <label for="nit">Nit:</label>
+                    <input type="text" class="form-control" id="nit" name="nit" placeholder="Ingrese Nit">
                   </div>
-                  <!-- /.post -->
+
+                  <div class="form-group">
+                    <label for="nombreUni">Nombre:</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre de la Intitución Educativa">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="pgWeb">Página Web</label>
+                    <input type="text" class="form-control" id="pgWeb" name="paginaWeb" placeholder="Nombre de la Intitución Educativa">
+                  </div>
+
+                </div>
+
+                <!-- /.box-body -->
+
+                <div class="box-footer">
+                  <button type="submit" class="btn btn-primary">Añadir</button>
+                </div>
+              </form>
+            </div>
+            <div class="box box-primary" id="expandir">
+              <div class="box-header with-border">
+                <h3 class="box-title">Editar Universidad</h3>
+                <div class="box-tools pull-right">
+                  <button class="btn btn-box-tool"><i class="fa fa-edit"></i></button>
+                </div><!-- /.box-tools -->
+              </div><!-- /.box-header -->
 
 
+              <form action="#" method="post" id="actualizador" role="form">
+                <div class="form-group">
+                  @csrf
+                  <label>Seleccione la universidad</label>
+                  <select name='seleccionado' id="mi"  class="form-control">
+
+                    @foreach ($listaUniversidades as $universidad)
+                      <option value="{{ $universidad->id }}">{{ $universidad->nombre }}</option>
+                    @endforeach
+                  </select>
+
+                </div>
+
+
+
+
+                @method('PATCH')
+                @csrf
+                <div class="box-body">
+
+
+
+
+
+                  <div class="form-group">
+                    <label for="nit2">Nit:</label>
+                    <input type="text" class="form-control" id="nit2" name="nit2" placeholder="Ingrese Nit">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="nombreUni2">Nombre:</label>
+                    <input type="text" class="form-control" id="nombreUni2" name="nombreUni2" placeholder="Nombre de la Intitución Educativa">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="pgWeb2">Página Web</label>
+                    <input type="text" class="form-control" id="pgWeb2" name="pgWeb2" placeholder="Nombre de la Intitución Educativa">
+                  </div>
+
+                </div>
+
+                <!-- /.box-body -->
+
+                <div class="box-footer">
+                  <button type="submit" class="btn btn-primary">Actualizar</button>
 
 
                 </div>
-                <!-- /.tab-pane -->
-              </div>
-              <!-- /.tab-content -->
-            </div>
-            <!-- /.nav-tabs-custom -->
+              </form>
+              <form class="" id="eliminador2" action="index.html" method="post">
+                @method('delete')
+                @csrf
+                <div class="box-footer">
+                  <button type="submit" id="eliminador" class="btn btn-danger">Eliminar</button>
+
+
+                </div>
+                {{-- <button type="submit" id="eliminador" class="btn btn-danger">Eliminar</button> --}}
+              </form>
+            </div><!-- /.box -->
+
+          </div>
+          <div class="col-md-8">
+            <div class="box box-default in">
+              <div class="box-header with-border">
+                <h3 class="box-title">Ver Universidades</h3>
+                <div class="box-tools pull-right">
+                  <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                </div><!-- /.box-tools -->
+              </div><!-- /.box-header -->
+
+                <div class="box-body table-responsive no-padding">
+                  <table class="table table-hover">
+                    <tbody><tr>
+                        <th>ID</th>
+                        <th>Nit</th>
+                        <th>Institución Educativa</th>
+                        <th>Página Web</th>
+                        <th>Fecha de inclusión</th>
+                        <th>Fecha Actualización</th>
+                      </tr>
+
+
+                      @foreach ($listaUniversidades as $universidad)
+                        <tr>
+                          <td>{{ $universidad->id }}</td>
+                          <td>{{ $universidad->nit }}</td>
+                          <td>{{ $universidad->nombre }}</td>
+                          <td><a href="{{ $universidad->paginaWeb }}">{{ $universidad->paginaWeb }}</a></td>
+                          <td>{{ $universidad->created_at }} <span class="label label-success">Verificada</span></td>
+                          <td>{{ $universidad->updated_at }}</td>
+                        </tr>
+                      @endforeach
+
+                    </tbody>
+                  </table>
+                </div>
+              <!-- /.box-body -->
+            </div><!-- /.box -->
           </div>
         </div>
 
@@ -379,9 +411,52 @@
     <script src="{{URL::asset ('admin/plugins/fastclick/fastclick.js')}}"></script>
     <!-- AdminLTE App -->
     <script src="{{URL::asset ('admin/dist/js/app.min.js')}}"></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    {{-- <script src="{{URL::asset ('admin/dist/js/pages/dashboard.js')}}"></script> --}}
-    <!-- AdminLTE for demo purposes -->
     <script src="{{URL::asset ('admin/dist/js/demo.js')}}"></script>
+    <!-- Cambiar accion para borrar universidad-->
+    <script type="text/javascript">
+      $('#eliminador').on('click',function(){
+        let dato = document.getElementById('mi').value;
+
+        $('#eliminador2').attr('action', '/admin/universidades/'+dato);
+      })
+    </script>
+    <!-- buscar universidad con base a la seleccion-->
+    <script type="text/javascript">
+
+      $('#mi').on('change',function(){
+
+          $value=$(this).val();
+
+          $.ajax(
+          {
+
+            type : 'get',
+
+            url : '{{URL::to('admin/buscaruniversidad')}}',
+
+            data:{'search':$value},
+
+            dataType: 'JSON',
+
+            success:function(data)
+            {
+
+              // console.log(data);
+              // console.log(data.nombre);
+              $('#nit2').val(data.nit);
+              $('#nombreUni2').val(data.nombre);
+              $('#pgWeb2').val(data.paginaWeb);
+              $('#actualizador').attr('action', '/admin/universidades/'+data.id);
+
+            }
+
+          });
+
+
+
+      })
+
+    </script>
+
   </body>
 </html>

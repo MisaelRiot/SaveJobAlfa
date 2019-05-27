@@ -70,3 +70,7 @@ Route::any('/broadcasting/auth', '\Illuminate\Broadcasting\BroadcastController@a
 
 // vistas de administradores
 Route::view('/admin/home', 'admin.admin_home');
+// Route::view('/admin/universidades', 'admin.admin_universidades');
+Route::get('/admin/universidades', 'UniversidadController@index')->name('admin.dashboard');
+Route::resource('admin/universidades','UniversidadController');
+Route::get('admin/buscaruniversidad','UniversidadController@searchuniversidades');

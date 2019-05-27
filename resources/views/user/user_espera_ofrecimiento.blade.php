@@ -226,7 +226,7 @@
                   } else {
                      $('#cont_menj').html('gone!');
                      $('#deletesuccess').remove();
-                     // window.location.replace("/");
+                     window.location.replace("/user/interaccion");
 
                      // cvr.add(dlg).hide();
                   }

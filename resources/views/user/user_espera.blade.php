@@ -100,7 +100,7 @@
                   } else {
                      $('#cont_menj').html('REDIRIGIENDO...');
                      $('#deletesuccess').remove();
-                     window.location.replace("/");
+                     window.location.replace("/user/interaccion");
                      location.reload(true);
                      // cvr.add(dlg).hide();
                   }

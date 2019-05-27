@@ -77,3 +77,4 @@ Route::resource('admin/universidades','UniversidadController');
 Route::get('admin/buscaruniversidad','UniversidadController@searchuniversidades');
 Route::resource('admin/facultades','FacultadController');
 Route::get('admin/buscarfacultad','FacultadController@searchfacultades');
+Route::get('admin/buscarfacultadEdit','FacultadController@searchfacultadesedit');

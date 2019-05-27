@@ -20,7 +20,9 @@ class FacultadController extends Controller
     {
         //
         $listaUniversidades = Universidad::all();
-        return view('admin.admin_facultades', compact('listaUniversidades'));
+        $listaFacultades = Facultad::all();
+        // return dd($listaFacultades);
+        return view('admin.admin_facultades', compact('listaUniversidades','listaFacultades'));
     }
 
     /**
@@ -52,12 +54,12 @@ class FacultadController extends Controller
 
         $data = $this->validate($request,[
         'universidad_id' => 'required',
-        'nombre' => 'required']);
+        'nombreUni2' => 'required']);
         //return $id;
         $share = Facultad::find($id);
         //return $share;
-        $share->universidad_id = $request->get('universidad');
-        $share->nombre = $request->get('nombreFacultad');
+        $share->universidad_id = $request->get('universidad_id');
+        $share->nombre = $request->get('nombreUni2');
 
         //return $share;
         $share->save();
@@ -95,4 +97,20 @@ class FacultadController extends Controller
           }
 
     }
+
+    public function searchfacultadesedit(Request $request)
+    {
+        //
+
+        if($request->ajax())
+          {
+            // return dd("hola");
+            $facultad=Facultad::where('id',$request->search)->get()->first();
+
+            return $facultad;
+            // return json_encode($products);
+          }
+
+    }
+
 }

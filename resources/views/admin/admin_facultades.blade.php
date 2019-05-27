@@ -306,8 +306,8 @@
 
 
                   <div class="form-group">
-                    <label for='universidad'>Seleccione la universidad</label>
-                    <select name='universidad_id' id="universidad"  class="form-control">
+                    <label for='universidad2'>Seleccione la universidad</label>
+                    <select name='universidad_id' id="universidad2"  class="form-control">
                       <option value="">--Seleccionar universidad--</option>
                       @foreach ($listaUniversidades as $universidad)
                         <option value="{{ $universidad->id }}">{{ $universidad->nombre }}</option>
@@ -356,22 +356,20 @@
                   <table class="table table-hover">
                     <tbody><tr>
                         <th>ID</th>
-                        <th>Nit</th>
-                        <th>Institución Educativa</th>
-                        <th>Página Web</th>
+                        <th>Nombre Facultad</th>
+                        <th>Nombre Universidad</th>
                         <th>Fecha de inclusión</th>
                         <th>Fecha Actualización</th>
                       </tr>
 
 
-                      @foreach ($listaUniversidades as $universidad)
+                      @foreach ($listaFacultades as $facultad)
                         <tr>
-                          <td>{{ $universidad->id }}</td>
-                          <td>{{ $universidad->nit }}</td>
-                          <td>{{ $universidad->nombre }}</td>
-                          <td><a href="{{ $universidad->paginaWeb }}">{{ $universidad->paginaWeb }}</a></td>
-                          <td>{{ $universidad->created_at }} <span class="label label-success">Verificada</span></td>
-                          <td>{{ $universidad->updated_at }}</td>
+                          <td>{{ $facultad->id }}</td>
+                          <td>{{ $facultad->nombre }}</td>
+                          <td>{{ $facultad->universidad->nombre }}</td>
+                          <td>{{ $facultad->created_at }} <span class="label label-success">Verificada</span></td>
+                          <td>{{ $facultad->updated_at }}</td>
                         </tr>
                       @endforeach
 
@@ -426,12 +424,12 @@
     <!-- Cambiar accion para borrar universidad-->
     <script type="text/javascript">
       $('#eliminador').on('click',function(){
-        let dato = document.getElementById('mi').value;
+        let dato = document.getElementById('miFacultad1').value;
 
-        $('#eliminador2').attr('action', '/admin/universidades/'+dato);
+        $('#eliminador2').attr('action', '/admin/facultades/'+dato);
       })
     </script>
-    <!-- buscar universidad con base a la seleccion-->
+    <!-- buscar facultades con base a la univerisidad seleccionada-->
     <script type="text/javascript">
 
       $('#miUni').on('change',function(){
@@ -465,6 +463,45 @@
                         $('#miFacultad1').append('<option value="'+ key +'">' + value + '</option>');
 
                     });
+
+            }
+
+          });
+
+
+
+      })
+
+    </script>
+
+    <!-- buscar facultad especifica con base a la seleccion-->
+    <script type="text/javascript">
+
+      $('#miFacultad1').on('change',function(){
+
+          $value=$(this).val();
+
+          $.ajax(
+          {
+
+            type : 'get',
+
+            url : '{{URL::to('admin/buscarfacultadEdit')}}',
+
+            data:{'search':$value},
+
+            dataType: 'JSON',
+
+            success:function(data)
+            {
+
+              console.log(data);
+              // console.log(data.nombre);
+              document.getElementById("universidad2").selectedIndex = data.universidad_id;
+              // $('#nit2').val(data.nit);
+              $('#nombreUni2').val(data.nombre);
+              // $('#pgWeb2').val(data.paginaWeb);
+              $('#actualizador').attr('action', '/admin/facultades/'+data.id);
 
             }
 

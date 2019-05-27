@@ -95,12 +95,12 @@
           if(true){
               (function countDown(){
                   if (t--) {
-                     $('#cont_menj').html('Interaccion encontrada! conectando en...'t + ' s');
+                     $('#cont_menj').html('Interaccion encontrada! conectando en...'+ t + ' s');
                      setTimeout(countDown, 1000);
                   } else {
                      $('#cont_menj').html('REDIRIGIENDO...');
                      $('#deletesuccess').remove();
-                     // window.location.replace("/");
+                     window.location.replace("/");
                      location.reload(true);
                      // cvr.add(dlg).hide();
                   }

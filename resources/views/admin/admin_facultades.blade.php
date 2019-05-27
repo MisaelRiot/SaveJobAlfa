@@ -195,7 +195,7 @@
         <ol class="breadcrumb">
           <li><a href="#"><i class="fa fa-dashboard"></i> Gestión Tutorias</a></li>
           {{-- <li><a href="#">Examples</a></li> --}}
-          <li class="active">Gestión Universidades</li>
+          <li class="active">Gestión Facultades</li>
         </ol>
       </section>
       <section class="content">
@@ -207,49 +207,50 @@
             <div class="alert alert-success alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                 <h4><i class="icon fa fa-check"></i> Felicidades!</h4>
-                !Universidad agregada exitosamente!
+                !Facultad agregada exitosamente!
             </div>
         @endif
         @if ($message=='updated')
             <div class="alert alert-success alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                 <h4><i class="icon fa fa-check"></i> Felicidades!</h4>
-                !Universidad actualizada exitosamente!
+                !Facultad actualizada exitosamente!
             </div>
         @endif
         @if ($message=='eliminated')
             <div class="alert alert-success alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                 <h4><i class="icon fa fa-check"></i> Felicidades!</h4>
-                !Universidad borrada exitosamente!
+                !Facultad borrada exitosamente!
             </div>
         @endif
         <div class="row">
           <div class="col-md-4">
             <div class="box box-primary">
               <div class="box-header with-border">
-                <h3 class="box-title">Añadir Universidad</h3>
+                <h3 class="box-title">Añadir Facultad</h3>
                 <div class="box-tools pull-right">
                   <button class="btn btn-box-tool"><i class="fa fa-plus"></i></button>
                 </div><!-- /.box-tools -->
               </div><!-- /.box-header -->
-              <form method="POST" action="/admin/universidades"  role="form">
+
+              <form method="POST" action="/admin/facultades"  role="form">
                 @csrf
                 <div class="box-body">
 
                   <div class="form-group">
-                    <label for="nit">Nit:</label>
-                    <input type="text" class="form-control" id="nit" name="nit" placeholder="Ingrese Nit">
+                    <label for='universidad'>Seleccione la universidad</label>
+                    <select name='universidad_id' id="universidad"  class="form-control">
+                      <option value="">--Seleccionar Universidad--</option>
+                      @foreach ($listaUniversidades as $universidad)
+                        <option value="{{ $universidad->id }}">{{ $universidad->nombre }}</option>
+                      @endforeach
+                    </select>
                   </div>
 
                   <div class="form-group">
                     <label for="nombreUni">Nombre:</label>
-                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre de la Intitución Educativa">
-                  </div>
-
-                  <div class="form-group">
-                    <label for="pgWeb">Página Web</label>
-                    <input type="text" class="form-control" id="pgWeb" name="paginaWeb" placeholder="Nombre de la Intitución Educativa">
+                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre de la Facultad">
                   </div>
 
                 </div>
@@ -271,19 +272,29 @@
 
 
               <form action="#" method="post" id="actualizador" role="form">
-                <div class="form-group">
-                  @csrf
-                  <label>Seleccione la universidad</label>
-                  <select name='seleccionado' id="mi"  class="form-control">
+                <div class="form-group box-body">
 
+                  <label>Seleccione la universidad</label>
+                  @csrf
+                  <select name='seleccionado' id="miUni"  class="form-control">
+                    <option value="">--Seleccionar Universidad--</option>
                     @foreach ($listaUniversidades as $universidad)
                       <option value="{{ $universidad->id }}">{{ $universidad->nombre }}</option>
                     @endforeach
                   </select>
 
                 </div>
+                <div class="form-group box-body">
+                  @csrf
+                  <label>Seleccione la facultad</label>
+                  <select name='seleccionado' id="miFacultad1"  class="form-control">
+                    <option value="">--Seleccionar facultad--</option>
 
+                  </select>
 
+                </div>
+
+                <hr>
 
 
                 @method('PATCH')
@@ -295,18 +306,18 @@
 
 
                   <div class="form-group">
-                    <label for="nit2">Nit:</label>
-                    <input type="text" class="form-control" id="nit2" name="nit2" placeholder="Ingrese Nit">
+                    <label for='universidad'>Seleccione la universidad</label>
+                    <select name='universidad_id' id="universidad"  class="form-control">
+                      <option value="">--Seleccionar universidad--</option>
+                      @foreach ($listaUniversidades as $universidad)
+                        <option value="{{ $universidad->id }}">{{ $universidad->nombre }}</option>
+                      @endforeach
+                    </select>
                   </div>
 
                   <div class="form-group">
                     <label for="nombreUni2">Nombre:</label>
-                    <input type="text" class="form-control" id="nombreUni2" name="nombreUni2" placeholder="Nombre de la Intitución Educativa">
-                  </div>
-
-                  <div class="form-group">
-                    <label for="pgWeb2">Página Web</label>
-                    <input type="text" class="form-control" id="pgWeb2" name="pgWeb2" placeholder="Nombre de la Intitución Educativa">
+                    <input type="text" class="form-control" id="nombreUni2" name="nombreUni2" placeholder="Nombre de la facultad">
                   </div>
 
                 </div>
@@ -417,22 +428,26 @@
       $('#eliminador').on('click',function(){
         let dato = document.getElementById('mi').value;
 
-        $('#eliminador2').attr('action', '/admin/facultades/'+dato);
+        $('#eliminador2').attr('action', '/admin/universidades/'+dato);
       })
     </script>
     <!-- buscar universidad con base a la seleccion-->
     <script type="text/javascript">
 
-      $('#mi').on('change',function(){
+      $('#miUni').on('change',function(){
 
           $value=$(this).val();
-
+          $.ajaxSetup({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
           $.ajax(
           {
 
             type : 'get',
 
-            url : '{{URL::to('admin/buscaruniversidad')}}',
+            url : '{{URL::to('admin/buscarfacultad')}}',
 
             data:{'search':$value},
 
@@ -441,12 +456,15 @@
             success:function(data)
             {
 
-              // console.log(data);
+              console.log(data);
               // console.log(data.nombre);
-              $('#nit2').val(data.nit);
-              $('#nombreUni2').val(data.nombre);
-              $('#pgWeb2').val(data.paginaWeb);
-              $('#actualizador').attr('action', '/admin/universidades/'+data.id);
+              $('#miFacultad1').empty();
+
+                    $.each(data, function(key, value){
+
+                        $('#miFacultad1').append('<option value="'+ key +'">' + value + '</option>');
+
+                    });
 
             }
 

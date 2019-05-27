@@ -11,9 +11,9 @@
 |
 */
 
-Route::view('/', 'welcome');
+// Route::view('/', 'welcome');
 //pagina de entrada a la aplicación requiere no esta autenticado
-Route::view('/prueba', 'savejobintro')->middleware('guest', 'guest:admin');
+Route::view('/', 'savejobintro')->middleware('guest', 'guest:admin');
 
 //paginas de login y rgistro de usuarios de la aplicación
 Auth::routes();
